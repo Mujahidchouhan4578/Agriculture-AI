@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Krashak Innovative Solution PVT. LTD. - Soil Analysis</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f5f5;
+
+            color: #222;
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 900px;
+
+            margin: 40px auto;
+        }
+
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .header h1 {
+
+            margin-bottom: 8px;
+
+            font-size: 36px;
+        }
+
+
+        .header p {
+
+            color: #666;
+
+            margin-top: 0;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .card h2 {
+
+            margin-top: 0;
+
+            margin-bottom: 20px;
+
+            font-size: 24px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            border-color: #555;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #222;
+
+            color: white;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background: #444;
+        }
+
+
+        button:disabled {
+
+            background: #999;
+
+            cursor: not-allowed;
+        }
+
+
+        .loading {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .error {
+
+            display: none;
+
+            background: #ffe5e5;
+
+            border: 1px solid #ffb3b3;
+
+            color: #b00000;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .result {
+
+            display: none;
+        }
+
+
+        .section {
+
+            margin-bottom: 30px;
+        }
+
+
+        .section:last-child {
+
+            margin-bottom: 0;
+        }
+
+
+        .section-title {
+
+            font-size: 22px;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        .farm-info {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .info-box {
+
+            background: #f8f8f8;
+
+            padding: 15px;
+
+            border-radius: 7px;
+
+            border: 1px solid #eee;
+        }
+
+
+        .info-label {
+
+            font-size: 13px;
+
+            color: #666;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-value {
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .nutrient-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .nutrient-card {
+
+            background: #f8f8f8;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            padding: 18px;
+        }
+
+
+        .nutrient-name {
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .nutrient-value {
+
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+
+        .unit {
+
+            font-size: 13px;
+
+            color: #666;
+
+            margin-left: 4px;
+        }
+
+
+        .deficiency-card {
+
+            border-left: 5px solid #555;
+
+            background: #f8f8f8;
+        }
+
+
+        .no-deficiency {
+
+            padding: 15px;
+
+            background: #f5f5f5;
+
+            border-radius: 6px;
+        }
+
+
+        .fertilizer-card {
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+
+            background: #fff;
+        }
+
+
+        .fertilizer-card h3 {
+
+            margin-top: 0;
+
+            margin-bottom: 15px;
+
+            font-size: 21px;
+        }
+
+
+        .fertilizer-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 15px;
+        }
+
+
+        .fertilizer-item {
+
+            background: #f7f7f7;
+
+            padding: 12px;
+
+            border-radius: 6px;
+        }
+
+
+        .fertilizer-label {
+
+            display: block;
+
+            color: #666;
+
+            font-size: 13px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .fertilizer-value {
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+
+        .quantity-box {
+
+            margin-top: 18px;
+
+            padding: 18px;
+
+            background: #eee;
+
+            border-radius: 7px;
+        }
+
+
+        .quantity-box h4 {
+
+            margin-top: 0;
+
+            margin-bottom: 12px;
+        }
+
+
+        .quantity-value {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+        }
+
+
+        .conversion-box {
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            background: #f5f5f5;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+        }
+
+
+        .reason {
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            background: #f8f8f8;
+
+            border-radius: 6px;
+        }
+
+
+        .application-box {
+
+            background: #f8f8f8;
+
+            padding: 18px;
+
+            border-radius: 7px;
+
+        }
+
+
+        .application-box h3 {
+
+            margin-top: 0;
+        }
+
+
+        .application-box ul {
+
+            margin-bottom: 0;
+
+            padding-left: 20px;
+        }
+
+
+        .application-box li {
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty {
+
+            color: #777;
+
+            font-style: italic;
+        }
+
+
+        @media (max-width: 650px) {
+
+            .container {
+
+                width: 95%;
+
+                margin: 20px auto;
+            }
+
+
+            .farm-info,
+            .nutrient-grid,
+            .fertilizer-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <div class="header">
+
+        <h1>Krashak Innovative Solution PVT. LTD.</h1>
+
+        <p>
+            Soil Analysis & Fertilizer Recommendation
+        </p>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- INPUT FORM -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <h2>Farm Analysis</h2>
+
+
+        <div class="form-group">
+
+            <label for="crop">
+                Crop
+            </label>
+
+             <select id="crop">
+
+                <option value="rice">
+                    Rice
+                </option>
+
+                <option value="mustard">
+                    Mustard
+                </option>
+
+                <option value="wheat">
+                    Wheat
+                </option>
+
+            </select> 
+
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="area">
+                Farm Area
+            </label>
+
+            <input
+                type="number"
+                id="area"
+                placeholder="Enter farm area"
+                min="0.01"
+                step="0.01"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="area_unit">
+                Area Unit
+            </label>
+
+            <select id="area_unit">
+
+                <option value="acre">
+                    Acre
+                </option>
+
+                <option value="hectare">
+                    Hectare
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="soil_report">
+                Soil Report PDF
+            </label>
+
+            <input
+                type="file"
+                id="soil_report"
+                accept=".pdf"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="analyzeButton"
+            onclick="analyzeFarm()"
+        >
+
+            Analyze Farm
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- LOADING -->
+    <!-- ========================================= -->
+
+    <div
+        class="loading card"
+        id="loading"
+    >
+
+        Analyzing your soil report...
+
+        <br>
+
+        Please wait while MAHSOUL processes
+        the report.
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- ERROR -->
+    <!-- ========================================= -->
+
+    <div
+        class="error"
+        id="error"
+    >
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- RESULT -->
+    <!-- ========================================= -->
+
+    <div
+        class="result"
+        id="result"
+    >
+
+
+        <!-- ===================================== -->
+        <!-- FARM INFORMATION -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Farm Information
+
+            </div>
+
+
+            <div class="farm-info">
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Crop
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="resultCrop"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Farm Area
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="resultArea"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- SOIL DATA -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Soil Analysis
+
+            </div>
+
+
+            <div
+                class="nutrient-grid"
+                id="soilData"
+            >
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- CROP REQUIREMENTS -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Crop Nutrient Requirements
+
+            </div>
+
+
+            <div
+                class="nutrient-grid"
+                id="cropRequirements"
+            >
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- DEFICIENCY -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Nutrient Deficiency
+
+            </div>
+
+
+            <div
+                class="nutrient-grid"
+                id="deficiency"
+            >
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- FERTILIZER RECOMMENDATION -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Fertilizer Recommendation
+
+            </div>
+
+
+            <div
+                id="fertilizers"
+            >
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- APPLICATION -->
+        <!-- ===================================== -->
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                Application Information
+
+            </div>
+
+
+            <div
+                class="application-box"
+                id="application"
+            >
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+// =====================================================
+// HELPER
+// =====================================================
+
+function displayValue(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+
+        return "N/A";
+
+    }
+
+    return value;
+
+}
+
+
+// =====================================================
+// NUTRIENT CARD
+// =====================================================
+
+function nutrientCard(
+    name,
+    value
+) {
+
+    return `
+
+        <div class="nutrient-card">
+
+            <div class="nutrient-name">
+
+                ${name}
+
+            </div>
+
+            <div class="nutrient-value">
+
+                ${displayValue(value)}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+// =====================================================
+// ANALYZE FARM
+// =====================================================
+
+async function analyzeFarm() {
+
+
+    // -----------------------------------------------
+    // Get form values
+    // -----------------------------------------------
+
+    const file =
+        document
+            .getElementById("soil_report")
+            .files[0];
+
+
+    const crop =
+        document
+            .getElementById("crop")
+            .value;
+
+
+    const area =
+        document
+            .getElementById("area")
+            .value;
+
+
+    const areaUnit =
+        document
+            .getElementById("area_unit")
+            .value;
+
+
+    const button =
+        document
+            .getElementById("analyzeButton");
+
+
+    const loading =
+        document
+            .getElementById("loading");
+
+
+    const errorBox =
+        document
+            .getElementById("error");
+
+
+    const result =
+        document
+            .getElementById("result");
+
+
+    // -----------------------------------------------
+    // Clear previous messages
+    // -----------------------------------------------
+
+    errorBox.style.display = "none";
+
+    errorBox.innerHTML = "";
+
+    result.style.display = "none";
+
+
+    // -----------------------------------------------
+    // Validate
+    // -----------------------------------------------
+
+    if (!file) {
+
+        errorBox.innerHTML =
+            "Please select a soil report PDF.";
+
+        errorBox.style.display = "block";
+
+        return;
+    }
+
+
+    if (!crop) {
+
+        errorBox.innerHTML =
+            "Please select a crop.";
+
+        errorBox.style.display = "block";
+
+        return;
+    }
+
+
+    if (!area) {
+
+        errorBox.innerHTML =
+            "Please enter the farm area.";
+
+        errorBox.style.display = "block";
+
+        return;
+    }
+
+
+    if (Number(area) <= 0) {
+
+        errorBox.innerHTML =
+            "Farm area must be greater than zero.";
+
+        errorBox.style.display = "block";
+
+        return;
+    }
+
+
+    // -----------------------------------------------
+    // Create FormData
+    // -----------------------------------------------
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "soil_report",
+        file
+    );
+
+
+    formData.append(
+        "crop",
+        crop
+    );
+
+
+    formData.append(
+        "area",
+        area
+    );
+
+
+    formData.append(
+        "area_unit",
+        areaUnit
+    );
+
+
+    // -----------------------------------------------
+    // Debug
+    // -----------------------------------------------
+
+    console.log(
+        "========== FORM DATA =========="
+    );
+
+
+    for (
+        const [key, value]
+        of formData.entries()
+    ) {
+
+        console.log(
+            key,
+            value
+        );
+
+    }
+
+
+    // -----------------------------------------------
+    // Loading state
+    // -----------------------------------------------
+
+    button.disabled = true;
+
+    button.innerText =
+        "Analyzing...";
+
+
+    loading.style.display =
+        "block";
+
+
+    try {
+
+
+        // =============================================
+        // SEND REQUEST TO DJANGO
+        // =============================================
+
+        const response =
+            await fetch(
+                "/api/analyze/",
+                {
+                    method: "POST",
+
+                    body: formData
+                }
+            );
+
+
+        // =============================================
+        // GET JSON
+        // =============================================
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "========== SERVER RESPONSE =========="
+        );
+
+        console.log(data);
+
+
+        // =============================================
+        // ERROR FROM BACKEND
+        // =============================================
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error ||
+                "Analysis failed."
+            );
+
+        }
+
+
+        // =============================================
+        // DATA
+        // =============================================
+
+        const farm =
+            data.data;
+
+
+        const soil =
+            farm.soil_data || {};
+
+
+        const requirements =
+            farm.crop_requirements || {};
+
+
+        const deficits =
+            farm.nutrient_deficit || {};
+
+
+        const recommendation =
+            farm.recommendation || {};
+
+
+        // =============================================
+        // FARM INFORMATION
+        // =============================================
+
+        document
+            .getElementById("resultCrop")
+            .innerText =
+                displayValue(
+                    farm.crop
+                );
+
+
+        document
+            .getElementById("resultArea")
+            .innerText =
+                `${displayValue(
+                    farm.area
+                )} ${displayValue(
+                    farm.area_unit
+                )}`;
+
+
+        // =============================================
+        // SOIL DATA
+        // =============================================
+
+        document
+            .getElementById("soilData")
+            .innerHTML = `
+
+                ${nutrientCard(
+                    "Nitrogen",
+                    soil.nitrogen
+                )}
+
+                ${nutrientCard(
+                    "Phosphorus",
+                    soil.phosphorus
+                )}
+
+                ${nutrientCard(
+                    "Potassium",
+                    soil.potassium
+                )}
+
+                ${nutrientCard(
+                    "pH",
+                    soil.ph
+                )}
+
+                ${nutrientCard(
+                    "Organic Carbon",
+                    soil.organic_carbon
+                )}
+
+                ${nutrientCard(
+                    "Sulphur",
+                    soil.sulphur
+                )}
+
+            `;
+
+
+        // =============================================
+        // CROP REQUIREMENTS
+        // =============================================
+
+        document
+            .getElementById(
+                "cropRequirements"
+            )
+            .innerHTML = `
+
+                ${nutrientCard(
+                    "Nitrogen",
+                    requirements.nitrogen
+                )}
+
+                ${nutrientCard(
+                    "Phosphorus",
+                    requirements.phosphorus
+                )}
+
+                ${nutrientCard(
+                    "Potassium",
+                    requirements.potassium
+                )}
+
+                ${nutrientCard(
+                    "Sulphur",
+                    requirements.sulphur
+                )}
+
+            `;
+
+
+        // =============================================
+        // DEFICIENCY
+        // =============================================
+
+        document
+            .getElementById(
+                "deficiency"
+            )
+            .innerHTML = `
+
+                ${nutrientCard(
+                    "Nitrogen",
+                    deficits.nitrogen
+                )}
+
+                ${nutrientCard(
+                    "Phosphorus",
+                    deficits.phosphorus
+                )}
+
+                ${nutrientCard(
+                    "Potassium",
+                    deficits.potassium
+                )}
+
+                ${nutrientCard(
+                    "Sulphur",
+                    deficits.sulphur
+                )}
+
+            `;
+
+
+        // =============================================
+        // FERTILIZERS
+        // =============================================
+
+        const fertilizers =
+            recommendation
+                .recommended_fertilizers || [];
+
+
+        let fertilizerHTML = "";
+
+
+        if (
+            fertilizers.length === 0
+        ) {
+
+            fertilizerHTML = `
+
+                <div class="empty">
+
+                    No fertilizer recommendation
+                    was returned.
+
+                </div>
+
+            `;
+
+        }
+
+
+        fertilizers.forEach(
+            function(fertilizer) {
+
+
+                let conversionHTML =
+                    "";
+
+
+                if (
+                    fertilizer.conversion_required
+                ) {
+
+                    const conversion =
+                        fertilizer.conversion;
+
+
+                    conversionHTML = `
+
+                        <div
+                            class="conversion-box"
+                        >
+
+                            <strong>
+                                Nutrient Conversion
+                            </strong>
+
+                            <br><br>
+
+                            From:
+                            ${displayValue(
+                                conversion?.from
+                            )}
+
+                            <br>
+
+                            To:
+                            ${displayValue(
+                                conversion?.to
+                            )}
+
+                            <br>
+
+                            Conversion Factor:
+                            ${displayValue(
+                                conversion?.factor
+                            )}
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                fertilizerHTML += `
+
+                    <div
+                        class="fertilizer-card"
+                    >
+
+                        <h3>
+
+                            ${displayValue(
+                                fertilizer.name
+                            )}
+
+                        </h3>
+
+
+                        <div
+                            class="fertilizer-grid"
+                        >
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Fertilizer Grade
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.grade
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Target Nutrient
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.target_nutrient
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Deficit Basis
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.deficit_basis
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Fertilizer Basis
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.fertilizer_basis
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Composition
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.composition_percent
+                                    )}%
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Density
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.density_kg_per_litre
+                                    )}
+                                    kg/L
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Converted Deficit
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.converted_deficit
+                                    )}
+                                    kg
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="fertilizer-item"
+                            >
+
+                                <span
+                                    class="fertilizer-label"
+                                >
+
+                                    Fertilizer Quantity
+
+                                </span>
+
+                                <span
+                                    class="fertilizer-value"
+                                >
+
+                                    ${displayValue(
+                                        fertilizer.fertilizer_kg
+                                    )}
+                                    kg
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        ${conversionHTML}
+
+
+                        <div
+                            class="quantity-box"
+                        >
+
+                            <h4>
+                                Required Liquid Quantity
+                            </h4>
+
+
+                            <div
+                                class="quantity-value"
+                            >
+
+                                ${displayValue(
+                                    fertilizer.quantity_litre
+                                )}
+                                Litres
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="reason"
+                        >
+
+                            <strong>
+                                Reason:
+                            </strong>
+
+                            <br>
+
+                            ${displayValue(
+                                fertilizer.reason
+                            )}
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        document
+            .getElementById(
+                "fertilizers"
+            )
+            .innerHTML =
+                fertilizerHTML;
+
+
+        // =============================================
+        // APPLICATION
+        // =============================================
+
+        let precautionsHTML =
+            "";
+
+
+        const precautions =
+            recommendation.precautions || [];
+
+
+        if (
+            precautions.length > 0
+        ) {
+
+            precautionsHTML = `
+
+                <h3>
+                    Precautions
+                </h3>
+
+                <ul>
+
+                    ${precautions
+                        .map(
+                            function(item) {
+
+                                return `
+                                    <li>
+                                        ${item}
+                                    </li>
+                                `;
+
+                            }
+                        )
+                        .join("")
+                    }
+
+                </ul>
+
+            `;
+
+        }
+
+
+        document
+            .getElementById(
+                "application"
+            )
+            .innerHTML = `
+
+                <h3>
+                    Application Method
+                </h3>
+
+                <p>
+                    ${displayValue(
+                        recommendation.application_method
+                    )}
+                </p>
+
+                ${precautionsHTML}
+
+            `;
+
+
+        // =============================================
+        // SHOW RESULT
+        // =============================================
+
+        result.style.display =
+            "block";
+
+
+        // Scroll to results
+
+        result.scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "MAHSOUL ERROR:",
+            error
+        );
+
+
+        errorBox.innerHTML = `
+
+            <strong>
+                Analysis Failed
+            </strong>
+
+            <br><br>
+
+            ${error.message}
+
+        `;
+
+
+        errorBox.style.display =
+            "block";
+
+    }
+
+
+    finally {
+
+
+        // =============================================
+        // RESTORE BUTTON
+        // =============================================
+
+        button.disabled =
+            false;
+
+
+        button.innerText =
+            "Analyze Farm";
+
+
+        loading.style.display =
+            "none";
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
